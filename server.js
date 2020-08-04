@@ -5,7 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3000; //try to fetch the port from process environment or default the port to 3000
 
 app.get("/", (request, response, next) => {
-  response.send("TEST: I'm able to get root");
+  response.send("Node API Server");
 });
 
 app.listen(PORT, () => {
