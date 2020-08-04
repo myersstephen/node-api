@@ -17,3 +17,15 @@ app.get("/", (request, response, next) => {
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
+
+/**
+ * Global Error Handling Middleware for Express
+ */
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send({
+    status: 500,
+    message: err.message,
+    body: {},
+  });
+});
