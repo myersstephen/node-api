@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000; //try to fetch the port from process envi
 BuiltIn Middleware for handling json and url-encoded payload 
 */
 app.use(express.json()); //Request Content-Type "application/json"
+app.use(express.urlencoded({ extended: true })); //Request Content-Type: "application/x-www-form-urlencoded"
 
 app.get("/", (request, response, next) => {
   response.send("Node API Server");
