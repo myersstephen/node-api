@@ -24,7 +24,29 @@ module.exports.createProduct = async (req, res) => {
     response.message = constants.productMessage.PRODUCT_CREATED_MESSAGE;
     response.body = responseFromService;
   } catch (error) {
-    console.log("Something went wrong: Controller: productController: ", error);
+    console.log("Something went wrong: Controller: createProduct: ", error);
+    response.message = error.message;
+  }
+
+  //send the whole response object
+  return res.status(response.status).send(response);
+};
+
+/**
+ *
+ * Goal : 1) Send the get request data to service 2) Send reponse to Client that requested the get
+ *
+ *
+ */
+module.exports.getAllProducts = async (req, res) => {
+  let response = { ...constants.defaultServerResponse };
+  try {
+    const responseFromService = await productService.getAllProducts();
+    response.status = 200;
+    response.message = constants.productMessage.PRODUCT_FETCHED_MESSAGE;
+    response.body = responseFromService;
+  } catch (error) {
+    console.log("Something went wrong: Controller: getAllProducts: ", error);
     response.message = error.message;
   }
 

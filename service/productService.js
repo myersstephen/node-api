@@ -18,3 +18,16 @@ module.exports.createProduct = async (productServiceData) => {
     console.log("Mongoose Save Document Error: Service: createProduct ", error);
   }
 };
+
+module.exports.getAllProducts = async (productServiceData) => {
+  try {
+    let allProducts = await Product.find({});
+    //if multiple documents we need to iterate over them all an apply toObject
+    return allProducts;
+  } catch (error) {
+    console.log(
+      "Mongoose Find Document Error: Service: getAllProducts ",
+      error
+    );
+  }
+};
