@@ -1,11 +1,16 @@
 const express = require("express");
 const dotEnv = require("dotenv");
 const cors = require("cors");
+const dbconnection = require("./database/connection");
 
 dotEnv.config(); //load the .env into process.env so we can use it later
 const app = express();
 const PORT = process.env.PORT || 3000; //try to fetch the port from process environment or default the port to 3000
 
+/**
+ * Database connection
+ */
+dbconnection();
 /**
  * BuiltIn Middleware for handling json and url-encoded payload
  */
