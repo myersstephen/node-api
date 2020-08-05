@@ -15,6 +15,7 @@ module.exports = async () => {
     console.log("Database connected");
   } catch (err) {
     console.log("Database connection error: ", err);
-    throw new Error(err);
+    //May not need to do both
+    //throw new Error(err);
   }
 };
