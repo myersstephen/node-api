@@ -16,12 +16,19 @@ dbconnection();
  */
 app.use(express.json()); //Request Content-Type "application/json"
 app.use(express.urlencoded({ extended: true })); //Request Content-Type: "application/x-www-form-urlencoded"
-
 /**
  * Third Party Middleware CORS - For any cross origin request
  * Cross-Origin Resource Sharing Enablement on server
  */
 app.use(cors());
+/**
+ * Base api route in the app level middleware
+ * We will transfer the route handlign to the router level middleware - ./routes/productRoutes || userRoutes , etc
+ */
+app.use("/api/v1/product", require("./routes/productRoutes"));
+//app.use("/api/v1/user", require("./routes/userRoutes"));
+//app.use("/api/v1/store", require("./routes/storeRoutes"));
+
 app.get("/", (request, response, next) => {
   response.send("Node API Server");
 });
