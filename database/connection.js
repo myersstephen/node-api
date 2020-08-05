@@ -8,7 +8,10 @@ const mongoose = require("mongoose");
 module.exports = async () => {
   try {
     //TODO: Fix deprecation Warning -  useUnifiedTopology: true
-    await mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
+    await mongoose.connect(process.env.DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("Database connected");
   } catch (err) {
     console.log("Database connection error: ", err);
