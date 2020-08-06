@@ -49,3 +49,35 @@ module.exports.getProductById = async ({ id }) => {
     );
   }
 };
+
+module.exports.updateProductById = async ({ id, updateInfo }) => {
+  try {
+    let product = await Product.findOneAndUpdate({ _id: id }, updateInfo, {
+      new: true, //to get back the updated document
+    });
+    if (!product) {
+      throw new Error(constants.productMessage.PRODUCT_NOT_FOUND);
+    }
+    return formatMongoData(product);
+  } catch (error) {
+    console.log(
+      "Mongoose Find Document Error: Service: updateProductByID ",
+      error
+    );
+  }
+};
+
+module.exports.deleteProductById = async ({ id }) => {
+  try {
+    let product = await Product.findByIdAndDelete(id);
+    if (!product) {
+      throw new Error(constants.productMessage.PRODUCT_NOT_FOUND);
+    }
+    return formatMongoData(product);
+  } catch (error) {
+    console.log(
+      "Mongoose Find Document Error: Service: deleteProductByID ",
+      error
+    );
+  }
+};

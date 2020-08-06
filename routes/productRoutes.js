@@ -33,4 +33,16 @@ router.get(
   productController.getProductById
 );
 
+router.put(
+  "/:id",
+  joiSchemaValidation.validatePathParams(productSchema.getProductByIdSchema),
+  joiSchemaValidation.validateBody(productSchema.updateProductSchema),
+  productController.updateProductById
+);
+
+router.delete(
+  "/:id",
+  joiSchemaValidation.validatePathParams(productSchema.getProductByIdSchema),
+  productController.deleteProductById
+);
 module.exports = router;

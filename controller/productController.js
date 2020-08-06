@@ -58,11 +58,63 @@ module.exports.getProductById = async (req, res) => {
   let response = { ...constants.defaultServerResponse };
   try {
     const responseFromService = await productService.getProductById(req.params);
-    response.status = 200;
-    response.message = constants.productMessage.PRODUCT_FETCHED_MESSAGE;
-    response.body = responseFromService;
+    if (responseFromService) {
+      response.status = 200;
+      response.message = constants.productMessage.PRODUCT_FETCHED_MESSAGE;
+      response.body = responseFromService;
+    } else {
+      response.status = 400;
+      response.message = constants.databaseMessage.INVALID_ID;
+    }
   } catch (error) {
     console.log("Something went wrong: Controller: getProductById: ", error);
+    response.message = error.message;
+  }
+
+  //send the whole response object
+  return res.status(response.status).send(response);
+};
+
+module.exports.updateProductById = async (req, res) => {
+  let response = { ...constants.defaultServerResponse };
+  try {
+    const responseFromService = await productService.updateProductById({
+      id: req.params.id,
+      updateInfo: req.body,
+    });
+    if (responseFromService) {
+      response.status = 200;
+      response.message = constants.productMessage.PRODUCT_UPDATED_MESSAGE;
+      response.body = responseFromService;
+    } else {
+      response.status = 400;
+      response.message = constants.databaseMessage.INVALID_ID;
+    }
+  } catch (error) {
+    console.log("Something went wrong: Controller: updateProductById: ", error);
+    response.message = error.message;
+  }
+
+  //send the whole response object
+  return res.status(response.status).send(response);
+};
+
+module.exports.deleteProductById = async (req, res) => {
+  let response = { ...constants.defaultServerResponse };
+  try {
+    const responseFromService = await productService.deleteProductById(
+      req.params
+    );
+    if (responseFromService) {
+      response.status = 200;
+      response.message = constants.productMessage.PRODUCT_DELETED_MESSAGE;
+      response.body = responseFromService;
+    } else {
+      response.status = 400;
+      response.message = constants.databaseMessage.INVALID_ID;
+    }
+  } catch (error) {
+    console.log("Something went wrong: Controller: delteProductById: ", error);
     response.message = error.message;
   }
 

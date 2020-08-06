@@ -2,9 +2,7 @@ const Joi = require("joi");
 
 module.exports.createProductSchema = Joi.object().keys({
   name: Joi.string().alphanum().min(3).max(30).required(),
-
   price: Joi.number().min(1).max(10000).required(),
-
   brand: Joi.string().min(2).max(30).required(),
 });
 
@@ -16,4 +14,10 @@ module.exports.getAllProductsSchema = Joi.object().keys({
 
 module.exports.getProductByIdSchema = Joi.object().keys({
   id: Joi.string().alphanum().min(24).max(24),
+});
+
+module.exports.updateProductSchema = Joi.object().keys({
+  name: Joi.string().alphanum().min(3).max(30),
+  price: Joi.number().min(1).max(10000),
+  brand: Joi.string().min(2).max(30),
 });
