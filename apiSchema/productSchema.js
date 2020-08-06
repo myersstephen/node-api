@@ -13,7 +13,7 @@ module.exports.getAllProductsSchema = Joi.object().keys({
 });
 
 module.exports.getProductByIdSchema = Joi.object().keys({
-  id: Joi.string().alphanum().min(24).max(24),
+  id: Joi.string().alphanum().min(24).max(24).required(),
 });
 
 module.exports.updateProductSchema = Joi.object().keys({
