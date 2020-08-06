@@ -19,11 +19,11 @@ Please view the API architecture diagram and prerequisites before getting starte
   ```bash
   $ brew services start mongodb-community@4.4
   ```
-- start the API server through nodemon on port 3002
+- Start the API server through nodemon in dev mode
   ```bash
   $ npm run dev
   ```
-- create a POST req from cURL
+- Create a POST request to create a product
   ```bash
   $ curl --location --request POST 'http://localhost:3002/api/v1/product' \
     --header 'Content-Type: application/json' \
@@ -33,9 +33,27 @@ Please view the API architecture diagram and prerequisites before getting starte
     "brand": "URBN"
     }'
   ```
-- create a GET req from cURL
+- Create a GET request to get all products
   ```bash
   $ curl --location --request GET 'http://localhost:3002/api/v1/product'
+  ```
+- Create a GET request to get a specific product by id - Note: must create product first
+  ```bash
+  $ curl --location --request GET 'http://localhost:3002/api/v1/product/{:id}'
+  $ curl --location --request GET 'http://localhost:3002/api/v1/product/5f2c0a0ccb817374174b8fec'
+  ```
+- Create a PUT request to update a product by id
+  ```bash
+  $ curl --location --request PUT 'http://localhost:3002/api/v1/product/5f2c0a0ccb817374174b8fec' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+    "price": 77
+    }'
+  ```
+- Create a DELETE request to delete a product by id
+  ```bash
+  $ curl --location --request DELETE 'http://localhost:3002/api/v1/product/{:id}'
+  $ curl --location --request DELETE 'http://localhost:3002/api/v1/product/5f2c0a0ccb817374174b8fec'
   ```
 - Stop the MongoDB Service from the terminal
   ```bash
