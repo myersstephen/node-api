@@ -21,5 +21,16 @@ router.post(
   productController.createProduct
 );
 
-router.get("/", productController.getAllProducts);
+router.get(
+  "/",
+  joiSchemaValidation.validateQueryParams(productSchema.getAllProductsSchema),
+  productController.getAllProducts
+);
+
+router.get(
+  "/:id",
+  joiSchemaValidation.validatePathParams(productSchema.getProductByIdSchema),
+  productController.getProductById
+);
+
 module.exports = router;

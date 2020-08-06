@@ -41,12 +41,28 @@ module.exports.createProduct = async (req, res) => {
 module.exports.getAllProducts = async (req, res) => {
   let response = { ...constants.defaultServerResponse };
   try {
-    const responseFromService = await productService.getAllProducts();
+    const responseFromService = await productService.getAllProducts(req.query);
     response.status = 200;
     response.message = constants.productMessage.PRODUCT_FETCHED_MESSAGE;
     response.body = responseFromService;
   } catch (error) {
     console.log("Something went wrong: Controller: getAllProducts: ", error);
+    response.message = error.message;
+  }
+
+  //send the whole response object
+  return res.status(response.status).send(response);
+};
+
+module.exports.getProductById = async (req, res) => {
+  let response = { ...constants.defaultServerResponse };
+  try {
+    const responseFromService = await productService.getProductById(req.params);
+    response.status = 200;
+    response.message = constants.productMessage.PRODUCT_FETCHED_MESSAGE;
+    response.body = responseFromService;
+  } catch (error) {
+    console.log("Something went wrong: Controller: getProductById: ", error);
     response.message = error.message;
   }
 

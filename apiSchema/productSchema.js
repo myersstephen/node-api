@@ -7,3 +7,13 @@ module.exports.createProductSchema = Joi.object().keys({
 
   brand: Joi.string().min(2).max(30).required(),
 });
+
+//This schema is for the Query Params
+module.exports.getAllProductsSchema = Joi.object().keys({
+  skip: Joi.string(),
+  limit: Joi.string(),
+});
+
+module.exports.getProductByIdSchema = Joi.object().keys({
+  id: Joi.string().alphanum().min(24).max(24),
+});
